@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Messages</title>
+		<style>
+			body {
+				background-color: white;
+			}
+
+			.message {
+				margin: 6px;
+				border: 1px solid rgba(000, 000, 000, 0.3);
+				border-radius: 10px;
+				padding-bottom: 8px;
+				padding-top: 5px;
+				padding-left: 8px;
+				padding-right: 8px;
+				font-family: Verdana, Geneva, Tahoma, sans-serif;
+				font-size: 13px;
+				background-color: white;
+				color: black;
+				word-wrap: break-word;
+			}
+
+			.sender-name {
+				font-weight: bold;
+				margin-bottom: 5px;
+				margin-top: 5px;
+				font-family: Arial, Helvetica, sans-serif;
+			}
+
+			.photo {
+				max-height: 240px;
+				max-width: 750px;
+				margin-right: 2px;
+			}
+
+			.gif {
+				max-height: 120px;
+				max-width: 120px;
+			}
+
+			.file-name {
+				color: '#aaa';
+				font-size: '5px';
+				margin: '0';
+				padding: '0';
+			}
+
+			#messages {
+				max-width: 800px;
+				margin: 0 auto;
+			}
+		</style>
+		<script src="script.js"></script>
+	</head>
+	<body>
+		<div style="text-align: center">
+			<img src="Stats/Percentage_Messages.svg" alt="Daily Messages" height="400px" />
+			<br />
+			<img src="Stats/Hourly_Messages.svg" alt="Daily Messages" height="400px" />
+			<br />
+			<img src="Stats/Daily_Messages.png" alt="Daily Messages" height="400px" />
+		</div>
+
+		<h1 style="text-align: center">Start</h1>
+
+		<div id="messages"></div>
+		<script>
+			// Make a request for the JSON file
+			const request = new XMLHttpRequest()
+			request.open('GET', 'messages.json', true)
+			request.onreadystatechange = function () {
+				if (this.readyState === 4 && this.status === 200) {
+					// Parse the JSON response
+					const jsonData = JSON.parse(this.responseText)
+					// Call the function to display the JSON data in HTML
+					displayMessages(jsonData)
+				}
+			}
+			request.send()
+		</script>
+
+		<h1 style="text-align: center">End</h1>
+	</body>
+</html>
